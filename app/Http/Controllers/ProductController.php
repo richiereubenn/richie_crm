@@ -11,5 +11,14 @@ class ProductController extends Controller
     {
         return view('products.index', ['products' => Product::all()]);
     }
+
+    public function destroy(Project $project)
+    {
+        if (Auth::user()->role !== 'Sales') abort(403);
+
+        $project->delete();
+
+        return redirect()->route('projects.index');
+    }
 }
 
