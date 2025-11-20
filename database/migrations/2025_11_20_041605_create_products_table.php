@@ -15,10 +15,9 @@ return new class extends Migration {
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('price');
-            $table->integer('subscription_period'); // days/months per your choice
+            $table->integer('subscription_period'); 
             $table->timestamps();
         });
-
     }
 
     /**
