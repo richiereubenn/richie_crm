@@ -32,6 +32,13 @@ class ProjectController extends Controller
         return view('projects.create', compact('leads', 'products'));
     }
 
+    public function show(Project $project)
+    {
+        $project->load(['lead', 'product']);
+
+        return view('projects.detail', compact('project'));
+    }
+
     public function store(Request $request)
     {
         $project = Project::create([

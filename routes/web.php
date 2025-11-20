@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('leads', LeadController::class);
 
     Route::resource('projects', ProjectController::class);
+    Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
     Route::post('/projects/{project}/approve', [ProjectController::class, 'approve'])
         ->name('projects.approve');
     Route::post('/projects/{project}/reject', [ProjectController::class, 'reject'])

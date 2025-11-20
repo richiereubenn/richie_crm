@@ -21,7 +21,8 @@
             <select name="product_id" class="w-full border px-3 py-2" required>
                 <option value="">-- select product --</option>
                 @foreach($products as $prod)
-                    <option value="{{ $prod->id }}">{{ $prod->name }} — Rp {{ number_format($prod->price, 0, ',', '.') }}</option>
+                    <option value="{{ $prod->id }}">{{ $prod->name }} — Rp {{ number_format($prod->price, 0, ',', '.') }}
+                    </option>
                 @endforeach
             </select>
         </div>
