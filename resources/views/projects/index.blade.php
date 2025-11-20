@@ -69,7 +69,7 @@
                             @endif
                         </td>
                         <td class="p-3 text-center">
-                            <a href="{{ route('projects.show', $p->id) }}"
+                            <a href="{{ route('projects.detail', $p->id) }}"
                                 class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg shadow-sm hover:shadow-md transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

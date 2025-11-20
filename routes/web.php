@@ -38,16 +38,14 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('leads', LeadController::class);
 
     Route::resource('projects', ProjectController::class);
-    Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
+    Route::get('/projects/{project}', [ProjectController::class, 'detail'])->name('projects.detail');
     Route::post('/projects/{project}/approve', [ProjectController::class, 'approve'])
         ->name('projects.approve');
     Route::post('/projects/{project}/reject', [ProjectController::class, 'reject'])
         ->name('projects.reject');
 
-    Route::resource('customers', CustomerController::class);
-
+    Route::resource('customers', CustomerController::class)->except(['show']);
     Route::post('/customers/{customer}/pay', [CustomerController::class, 'pay'])
         ->name('customers.pay');
-
-    Route::get('/customers/{lead}', [CustomerController::class, 'show'])->name('customers.show');
+    Route::get('/customers/{lead}', [CustomerController::class, 'detail'])->name('customers.detail');
 });

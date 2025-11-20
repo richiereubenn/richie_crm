@@ -17,8 +17,40 @@ class CustomerController extends Controller
                 $q->where('status', 'approved');
             })
             ->get()
-            ->groupBy('project.lead_id'); 
+            ->groupBy('project.lead_id');
 
         return view('customers.index', compact('customers'));
+    }
+
+    public function detail($lead)
+    {
+        $projects = Project::with('product')
+            ->where('lead_id', $lead)
+            ->where('status', 'approved')
+            ->get();
+
+        $lead = Lead::findOrFail($lead);
+
+        return view('customers.detail', compact('lead', 'projects'));
+    }
+
+    public function pay($project)
+    {
+        $project = Project::findOrFail($project);
+
+        $customer = Customer::firstOrCreate([
+            'project_id' => $project->id
+        ]);
+
+        $subscription = $project->product->subscription_period ?? 30;
+        $expired = now()->addDays($subscription);
+
+        $customer->update([
+            'payment_status' => 'paid',
+            'payment_date' => now(),
+            'expired_date' => $expired
+        ]);
+
+        return back()->with('success', 'Payment successfully updated!');
     }
 }

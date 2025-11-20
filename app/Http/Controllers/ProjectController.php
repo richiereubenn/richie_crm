@@ -32,7 +32,7 @@ class ProjectController extends Controller
         return view('projects.create', compact('leads', 'products'));
     }
 
-    public function show(Project $project)
+    public function detail(Project $project)
     {
         $project->load(['lead', 'product']);
 

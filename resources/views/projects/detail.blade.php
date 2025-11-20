@@ -1,12 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex items-center mb-6">
-        <a href="{{ route('projects.index') }}" class="px-4 py-2 bg-gray-600 text-black rounded hover:bg-gray-700">
-            Back
-        </a>
-        <h2 class="text-2xl font-semibold">Project Detail</h2>
-    </div>
+    <a href="{{ route('customers.index') }}" class="mb-4 inline-block text-gray-600">← Back</a>
+
+    <h2 class="text-2xl font-semibold">Project Detail</h2>
 
 
     <div class="bg-white p-6 rounded shadow">
@@ -23,10 +20,6 @@
             <p><strong>Description:</strong> {{ $project->product->description }}</p>
             <p><strong>Price:</strong> {{ number_format($project->product->price) }}</p>
             <p><strong>Subscription Period:</strong> {{ $project->product->subscription_period }} days</p>
-        </div>
-
-        <div class="mt-4">
-            <a href="{{ route('projects.index') }}" class="px-4 py-2 bg-gray-600 text-white rounded">Back</a>
         </div>
     </div>
 @endsection
