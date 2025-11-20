@@ -26,6 +26,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+        ->name('logout');
 
     Route::middleware('role:Admin')->group(function () {
         Route::resource('users', UserController::class);
