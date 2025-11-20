@@ -31,8 +31,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware('role:Admin')->group(function () {
         Route::resource('users', UserController::class);
-        Route::resource('products', ProductController::class);
     });
+
+    Route::resource('products', ProductController::class);
 
     Route::resource('leads', LeadController::class);
 

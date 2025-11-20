@@ -11,14 +11,32 @@ class ProductController extends Controller
     {
         return view('products.index', ['products' => Product::all()]);
     }
-
-    public function destroy(Project $project)
+    public function create()
     {
-        if (Auth::user()->role !== 'Sales') abort(403);
+        return view('products.create');
+    }
 
-        $project->delete();
+    public function store(Request $request)
+    {
+        Product::create($request->all());
+        return redirect()->route('products.index');
+    }
 
-        return redirect()->route('projects.index');
+    public function edit(Product $product)
+    {
+        return view('products.create', compact('product'));
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $product->update($request->all());
+        return redirect()->route('products.index');
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }
 

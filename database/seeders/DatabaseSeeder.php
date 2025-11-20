@@ -23,11 +23,11 @@ class DatabaseSeeder extends Seeder
         //     'role' => 'Admin',
         // ]);
 
-        // $manager = User::create([
-        //     'username' => 'manager',
-        //     'password' => Hash::make('manager123'),
-        //     'role' => 'Manager',
-        // ]);
+        $manager = User::create([
+            'username' => 'manager',
+            'password' => Hash::make('manager123'),
+            'role' => 'Manager',
+        ]);
 
         // $sales = User::create([
         //     'username' => 'sales',
@@ -41,12 +41,12 @@ class DatabaseSeeder extends Seeder
         //     'role' => 'Sales',
         // ]);
 
-        $ProductA = Product::create([
-            'name' => 'Product A',
-            'description' => 'Description for Product A',
-            'price' => 100000,
-            'subscription_period' => 30,
-        ]);
+        // $ProductA = Product::create([
+        //     'name' => 'Product A',
+        //     'description' => 'Description for Product A',
+        //     'price' => 100000,
+        //     'subscription_period' => 30,
+        // ]);
 
 
 
