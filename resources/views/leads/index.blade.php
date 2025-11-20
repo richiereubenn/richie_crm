@@ -11,7 +11,7 @@
                 </svg>
                 Add Leads
             </a>
-            @endif
+        @endif
     </div>
 
     <div class="bg-white shadow rounded">

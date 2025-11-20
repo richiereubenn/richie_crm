@@ -1,77 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex justify-between items-center mb-6">
-    <h2 class="text-2xl font-semibold">Projects</h2>
-    @if(auth()->user()->role === 'Sales')
-        <a href="{{ route('projects.create') }}" class="btn-primary">Add Project</a>
-    @endif
-</div>
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold">Customer List (Approved Projects)</h2>
+    </div>
 
-<div class="bg-white shadow rounded">
-    <table class="min-w-full">
-        <thead>
-            <tr class="border-b">
-                <th>#</th>
-                <th>Lead</th>
-                <th>Product</th>
-                <th>Status</th>
-                <th>Approval Note</th>
-                <th>Actions</th>
-                <th>Detail</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($projects as $p)
-            <tr class="border-b">
-                <td>{{ $p->id }}</td>
-                <td>{{ $p->lead->name }}</td>
-                <td>{{ $p->product->name }}</td>
-                <td>
-                    <span class="{{ $p->status === 'approved' ? 'bg-green-100 text-green-800' : ($p->status==='rejected' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800') }} px-2 py-1 rounded text-xs font-semibold">
-                        {{ ucfirst($p->status) }}
-                    </span>
-                </td>
-                <td>{{ $p->approval_note ?? '-' }}</td>
-                <td class="flex gap-2">
-                    @if(auth()->user()->role === 'Sales' && $p->status==='pending')
-                        <form action="{{ route('projects.destroy', $p) }}" method="POST" onsubmit="return confirm('Delete project?')">
-                            @csrf @method('DELETE')
-                            <button class="text-red-600 hover:text-red-800">Delete</button>
-                        </form>
-                    @elseif(auth()->user()->role === 'Manager' && $p->status==='pending')
-                        <button class="text-green-600 hover:text-green-800" onclick="openModal('approvalModal', {{ $p->id }}, 'approve')">Approve</button>
-                        <button class="text-red-600 hover:text-red-800" onclick="openModal('rejectionModal', {{ $p->id }}, 'reject')">Reject</button>
-                    @else
-                        <span>—</span>
-                    @endif
-                </td>
-                <td>
-                    <a href="{{ route('projects.show', $p->id) }}" class="btn-secondary">View</a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-
-<!-- Approval Modal -->
-<x-confirmation-modal id="approvalModal" title="Approve Project" button-text="Approve Project" button-color="green"
-    label="Approval Note" placeholder="Enter approval note..." />
-
-<!-- Rejection Modal -->
-<x-confirmation-modal id="rejectionModal" title="Reject Project" button-text="Reject Project" button-color="red"
-    label="Rejection Reason" placeholder="Enter rejection reason..." />
-
-@push('scripts')
-<script>
-function openModal(modalId, projectId, action) {
-    const form = document.getElementById(`${modalId}Form`);
-    form.action = `/projects/${projectId}/${action}`;
-    const modal = document.getElementById(modalId);
-    modal.classList.remove('hidden'); // show modal
-}
-</script>
-@endpush
-
+    <div class="bg-white shadow rounded">
+        <table class="min-w-full">
+            <thead>
+                <tr class="border-b">
+                    <th class="p-3 text-left">#</th>
+                    <th class="p-3 text-left">Lead Name</th>
+                    <th class="p-3 text-left">Email</th>
+                    <th class="p-3 text-left">Phone</th>
+                    <th class="p-3 text-center">Total Products</th>
+                    <th class="p-3 text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($customers as $lead_id => $items)
+                    @php $lead = $items->first()->project->lead; @endphp
+                    <tr class="border-b">
+                        <td class="p-3 text-left">{{ $loop->iteration }}</td>
+                        <td class="p-3">{{ $lead->name }}</td>
+                        <td class="p-3">{{ $lead->email }}</td>
+                        <td class="p-3">{{ $lead->phone }}</td>
+                        <td class="p-3 text-center">{{ $items->count() }} produk</td>
+                        <td class="p-3 text-center">
+                            <a href="{{ route('customers.show', $lead_id) }}"
+                                class="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg shadow-sm hover:shadow-md transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                                View Details
+                            </a>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6" class="text-center p-4">No approved projects yet</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 @endsection

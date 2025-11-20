@@ -48,4 +48,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/customers/{customer}/pay', [CustomerController::class, 'pay'])
         ->name('customers.pay');
+
+    Route::get('/customers/{lead}', [CustomerController::class, 'show'])->name('customers.show');
 });
