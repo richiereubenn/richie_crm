@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>CRM ISP</title>
   @vite('resources/css/app.css')
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/css/tw-elements.min.css" />
 </head>
 <body class="min-h-screen bg-gray-100">
   <div class="flex">
@@ -46,5 +47,7 @@
       @yield('content')
     </main>
   </div>
+      <script src="https://cdn.jsdelivr.net/npm/tw-elements/js/tw-elements.umd.min.js"></script>
+
 </body>
 </html>

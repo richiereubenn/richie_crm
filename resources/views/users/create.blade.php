@@ -2,7 +2,7 @@
 
 @section('content')
     <h2 class="text-xl font-semibold mb-4">
-        {{ isset($user) ? 'Edit User' : 'Tambah User' }}
+        {{ isset($user) ? 'Edit User' : 'Create User' }}
     </h2>
 
     <form action="{{ isset($user) ? route('users.update', $user) : route('users.store') }}" method="POST"

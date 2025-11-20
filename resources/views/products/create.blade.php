@@ -2,7 +2,7 @@
 
 @section('content')
 <h2 class="text-xl font-semibold mb-4">
-    {{ isset($product) ? 'Edit Product' : 'Tambah Product' }}
+    {{ isset($product) ? 'Edit Product' : 'Create Product' }}
 </h2>
 
 <form 
@@ -34,7 +34,7 @@
     </div>
 
     <div class="mb-4">
-        <label class="block text-sm">Price (int)</label>
+        <label class="block text-sm">Price</label>
         <input 
             name="price" 
             type="number" 

@@ -2,7 +2,7 @@
 
 @section('content')
 <h2 class="text-xl font-semibold mb-4">
-    {{ isset($lead) ? 'Edit Lead' : 'Tambah Lead' }}
+    {{ isset($lead) ? 'Edit Lead' : 'Create Lead' }}
 </h2>
 
 <form 
