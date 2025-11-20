@@ -25,7 +25,7 @@
         <td class="p-3 flex gap-2 justify-center">
           <a href="{{ route('users.edit', $u) }}" class="text-blue-600">Edit</a>
 
-          <form action="{{ route('users.destroy', $u) }}" method="POST" onsubmit="return confirm('Delete user?')">
+          <form action="{{ route('users.destroy', $u) }}" method="POST" onsubmit="return confirm('Are you sure?, This action will permanently delete the user.')">
             @csrf @method('DELETE')
             <button type="submit" class="text-red-600">Delete</button>
           </form>
