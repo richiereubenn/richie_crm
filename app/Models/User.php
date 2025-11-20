@@ -18,6 +18,12 @@ class User extends Authenticatable
         'role',
     ];
 
+    // public function getAuthIdentifierName()
+    // {
+    //     return 'id';
+    // }
+
+
     /**
      * The attributes that are mass assignable.
      *
