@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        // $admin = User::create([
-        //     'username' => 'admin',
-        //     'password' => Hash::make('admin123'),
-        //     'role' => 'Admin',
-        // ]);
+        $admin = User::create([
+            'username' => 'admin',
+            'password' => Hash::make('admin123'),
+            'role' => 'Admin',
+        ]);
 
         $manager = User::create([
             'username' => 'manager',
@@ -29,24 +29,24 @@ class DatabaseSeeder extends Seeder
             'role' => 'Manager',
         ]);
 
-        // $sales = User::create([
-        //     'username' => 'sales',
-        //     'password' => Hash::make('sales123'),
-        //     'role' => 'Sales',
-        // ]);
+        $sales = User::create([
+            'username' => 'sales',
+            'password' => Hash::make('sales123'),
+            'role' => 'Sales',
+        ]);
 
-        // $sales2 = User::create([
-        //     'username' => 'sales2',
-        //     'password' => Hash::make('sales123'),
-        //     'role' => 'Sales',
-        // ]);
+        $sales2 = User::create([
+            'username' => 'sales2',
+            'password' => Hash::make('sales123'),
+            'role' => 'Sales',
+        ]);
 
-        // $ProductA = Product::create([
-        //     'name' => 'Product A',
-        //     'description' => 'Description for Product A',
-        //     'price' => 100000,
-        //     'subscription_period' => 30,
-        // ]);
+        $ProductA = Product::create([
+            'name' => 'Product A',
+            'description' => 'Description for Product A',
+            'price' => 100000,
+            'subscription_period' => 30,
+        ]);
 
 
 

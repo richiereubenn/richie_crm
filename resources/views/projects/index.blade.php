@@ -34,11 +34,10 @@
                         <td class="p-3">{{ $p->lead->name }}</td>
                         <td class="p-3">{{ $p->product->name }}</td>
                         <td class="p-3">
-                            <span
-                                class="px-2 py-1 rounded text-xs font-semibold
-                                                                                            {{ $p->status === 'approved' ? 'bg-green-100 text-green-800' : '' }}
-                                                                                            {{ $p->status === 'rejected' ? 'bg-red-100 text-red-800' : '' }}
-                                                                                            {{ $p->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}">
+                            <span class="px-2 py-1 rounded text-xs font-semibold
+                                {{ $p->status === 'approved' ? 'bg-green-100 text-green-800' : '' }}
+                                {{ $p->status === 'rejected' ? 'bg-red-100 text-red-800' : '' }}
+                                {{ $p->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}">
                                 {{ ucfirst($p->status) }}
                             </span>
                         </td>
@@ -56,14 +55,10 @@
                                 @endif
                             @elseif(auth()->user()->role === 'Manager')
                                 @if($p->status === 'pending')
-                                    <button data-twe-toggle="modal" data-twe-target="#approvalModal" data-twe-ripple-init
-                                        data-twe-ripple-color="light" onclick="openModal('approvalModal', {{ $p->id }}, 'approve')"
-                                        class="text-green-600 hover:text-green-800">
+                                    <button onclick="openModal('approve', {{ $p->id }})" class="text-green-600 hover:text-green-800">
                                         Approve
                                     </button>
-                                    <button data-twe-toggle="modal" data-twe-target="#rejectionModal" data-twe-ripple-init
-                                        data-twe-ripple-color="light" onclick="openModal('rejectionModal', {{ $p->id }}, 'reject')"
-                                        class="text-red-600 hover:text-red-800 ml-2">
+                                    <button onclick="openModal('reject', {{ $p->id }})" class="text-red-600 hover:text-red-800 ml-2">
                                         Reject
                                     </button>
                                 @else
@@ -91,18 +86,68 @@
         </table>
     </div>
 
-    <x-confirmation-modal id="approvalModal" title="Approve Project" button-text="Approve Project" button-color="green"
-        label="Approval Note" placeholder="Enter approval note..." />
+    <div id="approvalModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <h3 id="modalTitle" class="text-lg leading-6 font-medium text-gray-900 mb-4"></h3>
+                <form id="approvalForm" method="POST">
+                    @csrf
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2" id="modalLabel"></label>
+                        <textarea name="approval_note" rows="4"
+                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Enter your note here..." required></textarea>
+                    </div>
+                    <div class="flex gap-3 justify-end">
+                        <button type="button" onclick="closeModal()"
+                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-md">
+                            Cancel
+                        </button>
+                        <button type="submit" id="modalSubmitBtn" class="px-4 py-2 text-white rounded-md">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    <x-confirmation-modal id="rejectionModal" title="Reject Project" button-text="Reject Project" button-color="red"
-        label="Rejection Reason" placeholder="Enter rejection reason..." />
+    <script>
+        function openModal(action, projectId) {
+            const modal = document.getElementById('approvalModal');
+            const form = document.getElementById('approvalForm');
+            const title = document.getElementById('modalTitle');
+            const label = document.getElementById('modalLabel');
+            const submitBtn = document.getElementById('modalSubmitBtn');
 
-    @push('scripts')
-        <script>
-            function openModal(modalId, projectId, action) {
-                const form = document.getElementById(`${modalId}Form`);
-                form.action = `/projects/${projectId}/${action}`;
+            if (action === 'approve') {
+                form.action = `/projects/${projectId}/approve`;
+                title.textContent = 'Approve Project';
+                label.textContent = 'Approval Note:';
+                submitBtn.textContent = 'Approve';
+                submitBtn.className = 'px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md';
+            } else {
+                form.action = `/projects/${projectId}/reject`;
+                title.textContent = 'Reject Project';
+                label.textContent = 'Rejection Reason:';
+                submitBtn.textContent = 'Reject';
+                submitBtn.className = 'px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md';
             }
-        </script>
-    @endpush
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('approvalModal');
+            const form = document.getElementById('approvalForm');
+            modal.classList.add('hidden');
+            form.reset();
+        }
+
+        document.getElementById('approvalModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
 @endsection
