@@ -29,8 +29,7 @@
 
         @if($errors->any())
             <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-                <strong>Oops! Ada yang salah:</strong>
-                <p>halo</p>
+                <strong>Oops! Something went wrong:</strong>
                 <ul class="mt-2 list-disc list-inside">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -41,7 +40,7 @@
 
         <div>
             <button class="px-4 py-2 bg-green-600 text-white rounded">Create</button>
-            <a href="{{ route('projects.index') }}" class="ml-2 text-gray-600">Cancel</a>
+            <a href="{{ route('projects.index') }}" class="ml-2 text-red-600">Cancel</a>
         </div>
     </form>
 @endsection

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="mb-6 items-center">
-        <a href="{{ route('customers.index') }}"
+        <a href="{{ route('projects.index') }}"
             class="inline-flex items-center mb-2 text-gray-600 hover:text-gray-800 transition-all duration-150">
             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />

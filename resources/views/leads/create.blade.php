@@ -33,8 +33,7 @@
         </div>
         @if($errors->any())
             <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-                <strong>Oops! Ada yang salah:</strong>
-                <p>halo</p>
+                <strong>Oops! Something went wrong:</strong>
                 <ul class="mt-2 list-disc list-inside">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>

@@ -37,8 +37,7 @@
 
         @if($errors->any())
             <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-                <strong>Oops! Ada yang salah:</strong>
-                <p>halo</p>
+                <strong>Oops! Something went wrong:</strong>
                 <ul class="mt-2 list-disc list-inside">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -51,7 +50,7 @@
             <button class="bg-green-600 px-6 py-2 rounded text-white">
                 {{ isset($product) ? 'Update' : 'Save' }}
             </button>
-            <a href="{{ route('products.index') }}" class="ml-2 text-gray-600">Cancel</a>
+            <a href="{{ route('products.index') }}" class="ml-2 text-red-600">Cancel</a>
         </div>
     </form>
 @endsection

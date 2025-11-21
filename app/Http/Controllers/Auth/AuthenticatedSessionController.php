@@ -50,7 +50,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         if ($user->role === 'Manager') {
-            return redirect()->route('leads.index');
+            return redirect()->route('customers.index');
         }
 
         if ($user->role === 'Sales') {
