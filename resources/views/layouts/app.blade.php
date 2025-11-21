@@ -16,12 +16,12 @@
 
       <nav class="p-4">
         @if(auth()->user()->role === 'Admin')
-          <a href="{{ route('users.index') }}" class="block p-3 rounded hover:bg-gray-100 {{ request()->routeIs('users.*') ? 'bg-gray-50' : '' }}">Manage User</a>
+          <a href="{{ route('users.index') }}" class="block p-3 rounded hover:bg-gray-100 {{ request()->routeIs('users.*') ? 'bg-gray-100' : '' }}">Manage User</a>
         @endif
-        <a href="{{ route('leads.index') }}" class="block p-3 rounded hover:bg-gray-100 {{ request()->routeIs('leads.*') ? 'bg-gray-50' : '' }}">Leads</a>
-        <a href="{{ route('products.index') }}" class="block p-3 rounded hover:bg-gray-100 {{ request()->routeIs('products.*') ? 'bg-gray-50' : '' }}">Products</a>
-        <a href="{{ route('projects.index') }}" class="block p-3 rounded hover:bg-gray-100 {{ request()->routeIs('projects.*') ? 'bg-gray-50' : '' }}">Projects</a>
-        <a href="{{ route('customers.index') }}" class="block p-3 rounded hover:bg-gray-100 {{ request()->routeIs('customers.*') ? 'bg-gray-50' : '' }}">Customers</a>
+        <a href="{{ route('leads.index') }}" class="block p-3 rounded hover:bg-gray-100 {{ request()->routeIs('leads.*') ? 'bg-gray-100' : '' }}">Leads</a>
+        <a href="{{ route('products.index') }}" class="block p-3 rounded hover:bg-gray-100 {{ request()->routeIs('products.*') ? 'bg-gray-100' : '' }}">Products</a>
+        <a href="{{ route('projects.index') }}" class="block p-3 rounded hover:bg-gray-100 {{ request()->routeIs('projects.*') ? 'bg-gray-100' : '' }}">Projects</a>
+        <a href="{{ route('customers.index') }}" class="block p-3 rounded hover:bg-gray-100 {{ request()->routeIs('customers.*') ? 'bg-gray-100' : '' }}">Customers</a>
       </nav>
 
       <div class="p-4 mt-auto border-t">
