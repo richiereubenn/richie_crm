@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
         $admin = User::create([
             'username' => 'admin',
@@ -29,8 +28,8 @@ class DatabaseSeeder extends Seeder
             'role' => 'Manager',
         ]);
 
-        $sales = User::create([
-            'username' => 'sales',
+        $sales1 = User::create([
+            'username' => 'sales1',
             'password' => Hash::make('sales123'),
             'role' => 'Sales',
         ]);
@@ -41,10 +40,38 @@ class DatabaseSeeder extends Seeder
             'role' => 'Sales',
         ]);
 
-        $ProductA = Product::create([
-            'name' => 'Product A',
-            'description' => 'Description for Product A',
-            'price' => 100000,
+        $product1 = Product::create([
+            'name' => 'Basic Internet Plan',
+            'description' => 'Home internet plan with up to 30 Mbps speed.',
+            'price' => 150000,
+            'subscription_period' => 30,
+        ]);
+
+        $product2 = Product::create([
+            'name' => 'Family Internet Plan',
+            'description' => 'Internet plan up to 50 Mbps, ideal for streaming and multiple devicet.',
+            'price' => 250000,
+            'subscription_period' => 30,
+        ]);
+
+        $product3 = Product::create([
+            'name' => 'Gamer Pro Plan',
+            'description' => 'High-performance ISP plan with 100 Mbps speed.',
+            'price' => 400000,
+            'subscription_period' => 30,
+        ]);
+
+        $product4 = Product::create([
+            'name' => 'Business Fiber Plan',
+            'description' => 'Dedicated fiber connection up to 200 Mbps.',
+            'price' => 750000,
+            'subscription_period' => 30,
+        ]);
+
+        $product5 = Product::create([
+            'name' => 'Enterprise Dedicated Plan',
+            'description' => 'Enterprise-grade dedicated internet with up to 500 Mbps speed.',
+            'price' => 1500000,
             'subscription_period' => 30,
         ]);
 
