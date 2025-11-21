@@ -10,32 +10,49 @@ Tujuan poryek :
 
 ## Deployment Guide
 #### 1. Clone Repository
-git clone https://github.com/richiereubenn/richie_crm.git \
+```
+git clone https://github.com/richiereubenn/richie_crm.git
 cd richie_crm
+```
 
 #### 2. Install Dependencies
-composer install\
+```
+composer install
 npm install
+```
 
 #### 3. Copy .env File
+```
 cp .env.example .env
+```
 
 #### 4. Setup Database (isi bagian ini pada .env)
-DB_CONNECTION=pgsql\
-DB_HOST=127.0.0.1\
-DB_PORT=5432\
-DB_DATABASE=nama_database\
-DB_USERNAME=username_postgre\
-DB_PASSWORD=password_postgre\
+```
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=database_name
+DB_USERNAME=postgre_username
+DB_PASSWORD=postgre_password
+```
 
 #### 5. Generate App Key
+```
 php artisan key:generate
+```
 
 #### 6. Run Migration & Seeder
+```
 php artisan migrate --seed
+```
 
 #### 7. Compile TailwindCSS
+```
 npm run dev
+```
 
 #### 8. Run Application
+```
 php artisan serve
+```
+
