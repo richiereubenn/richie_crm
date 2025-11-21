@@ -26,7 +26,8 @@ class ProductController extends Controller
         ]);
 
         Product::create($request->all());
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')
+            ->with('success', 'Product has been successfully created!');;
     }
 
     public function edit(Product $product)
@@ -43,7 +44,9 @@ class ProductController extends Controller
             'description' => 'nullable|string|max:255',
         ]);
         $product->update($request->all());
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')
+            ->with('success', 'Product has been successfully edited!');
+;
     }
 
     public function destroy(Product $product)

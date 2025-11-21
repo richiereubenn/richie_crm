@@ -41,7 +41,8 @@ class LeadController extends Controller
             'address' => $request->address,
         ]);
 
-        return redirect()->route('leads.index');
+        return redirect()->route('leads.index')
+            ->with('success', 'Lead has been successfully created!');;
     }
 
     public function edit(Lead $lead)
@@ -57,7 +58,7 @@ class LeadController extends Controller
         if (Auth::user()->role === 'Sales' && $lead->user_id != Auth::id()) {
             abort(403);
         }
-        
+
         $request->validate([
             'name' => 'required|string|min:3|max:100',
             'email' => 'required|email',
@@ -67,7 +68,8 @@ class LeadController extends Controller
 
         $lead->update($request->all());
 
-        return redirect()->route('leads.index');
+        return redirect()->route('leads.index')
+            ->with('success', 'Project has been successfully edited!');;
     }
 
     public function destroy(Lead $lead)

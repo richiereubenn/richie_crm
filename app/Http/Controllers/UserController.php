@@ -33,7 +33,8 @@ class UserController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')
+            ->with('success', 'User has been successfully created!');;
     }
 
     public function edit(User $user)
@@ -59,7 +60,8 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route(route: 'users.index');
+        return redirect()->route(route: 'users.index')
+            ->with('success', 'User has been successfully edited!');;
     }
 
     public function destroy(User $user)
