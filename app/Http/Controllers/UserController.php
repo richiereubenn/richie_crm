@@ -22,15 +22,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'username' => 'required|unique:users',
-            'password' => 'required',
-            'role'     => 'required'
+            'username' => 'required|string|min:4|max:50|unique:users,username',
+            'password' => 'required|string|min:8|regex:/^(?=.*[0-9])(?=.*[!@#$%^&*])/',
+            'role' => 'required|in:Admin,Manager,Sales',
         ]);
 
         User::create([
             'username' => $request->username,
             'password' => Hash::make($request->password),
-            'role'     => $request->role,
+            'role' => $request->role,
         ]);
 
         return redirect()->route('users.index');
@@ -43,6 +43,11 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
+        $request->validate([
+            'username' => 'required|string|min:4|max:50|unique:users,username',
+            'role' => 'required|in:Admin,Manager,Sales',
+        ]);
+
         $data = [
             'username' => $request->username,
             'role' => $request->role,

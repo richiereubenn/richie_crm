@@ -27,10 +27,10 @@ class LeadController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
+            'name' => 'required|string|min:3|max:100',
+            'email' => 'required|email',
+            'phone' => 'required|numeric|digits_between:10,15',
+            'address' => 'required|string|max:255',
         ]);
 
         Lead::create([
@@ -57,6 +57,13 @@ class LeadController extends Controller
         if (Auth::user()->role === 'Sales' && $lead->user_id != Auth::id()) {
             abort(403);
         }
+        
+        $request->validate([
+            'name' => 'required|string|min:3|max:100',
+            'email' => 'required|email',
+            'phone' => 'required|numeric|digits_between:10,15',
+            'address' => 'required|string|max:255',
+        ]);
 
         $lead->update($request->all());
 

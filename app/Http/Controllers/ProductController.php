@@ -18,6 +18,13 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'price' => 'required|numeric|min:0',
+            'subscription_period' => 'required|integer|min:1',
+            'description' => 'nullable|string|max:255',
+        ]);
+
         Product::create($request->all());
         return redirect()->route('products.index');
     }
@@ -29,6 +36,12 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'price' => 'required|numeric|min:0',
+            'subscription_period' => 'required|integer|min:1',
+            'description' => 'nullable|string|max:255',
+        ]);
         $product->update($request->all());
         return redirect()->route('products.index');
     }

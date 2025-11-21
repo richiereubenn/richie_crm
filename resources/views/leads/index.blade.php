@@ -14,7 +14,7 @@
         @endif
     </div>
 
-    <div class="bg-white shadow rounded">
+    <div class="bg-white shadow-md rounded-lg">
         <table class="min-w-full">
             <thead>
                 <tr class="border-b">
@@ -27,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($leads as $lead)
+                @forelse($leads as $lead)
                     <tr class="border-b">
                         <td class="p-3">{{ $lead->id }}</td>
                         <td class="p-3">{{ $lead->name }}</td>
@@ -36,8 +36,8 @@
                         <td class="p-3">{{ $lead->address }}</td>
                         <td class="p-3 flex gap-2 justify-center">
                             @if(auth()->user()->role === 'Sales' && $lead->user_id === auth()->id())
-                                <a href="{{ route(name: 'leads.edit', parameters: $lead) }}" class="text-blue-600">Edit</a>
-                                <form action="{{ route(name: 'leads.destroy', parameters: $lead) }}" method="POST"
+                                <a href="{{ route('leads.edit', $lead) }}" class="text-blue-600">Edit</a>
+                                <form action="{{ route('leads.destroy', $lead) }}" method="POST"
                                     onsubmit="return confirm('Are you sure? This action will permanently delete the lead')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="text-red-600">Delete</button>
@@ -47,8 +47,13 @@
                             @endif
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="6" class="text-center p-4 text-gray-500">No lead data available.</td>
+                    </tr>
+                @endforelse
             </tbody>
+
         </table>
     </div>
 @endsection

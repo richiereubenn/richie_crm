@@ -12,7 +12,7 @@
     </a>
   </div>
 
-  <div class="bg-white shadow rounded">
+  <div class="bg-white shadow-md rounded-lg">
     <table class="min-w-full">
       <thead>
         <tr class="border-b">
@@ -23,7 +23,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach($users as $u)
+        @forelse($users as $u)
           <tr class="border-b">
             <td class="p-3">{{ $u->id }}</td>
             <td class="p-3">{{ $u->username }}</td>
@@ -38,7 +38,13 @@
               </form>
             </td>
           </tr>
-        @endforeach
+        @empty
+          <tr>
+            <td colspan="4" class="text-center p-4 text-gray-500">
+              No users available yet.
+            </td>
+          </tr>
+        @endforelse
       </tbody>
     </table>
   </div>

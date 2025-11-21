@@ -14,7 +14,7 @@
         @endif
     </div>
 
-    <div class="bg-white shadow rounded">
+    <div class="bg-white shadow-md rounded-lg">
         <table class="min-w-full">
             <thead>
                 <tr class="border-b">
@@ -27,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($products as $p)
+                @forelse($products as $p)
                     <tr class="border-b">
                         <td class="p-3">{{ $p->id }}</td>
                         <td class="p-3">{{ $p->name }}</td>
@@ -47,7 +47,13 @@
                             @endif
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="6" class="text-center p-4 text-gray-500">
+                            No products available yet.
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

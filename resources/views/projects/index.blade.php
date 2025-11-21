@@ -14,7 +14,7 @@
         @endif
     </div>
 
-    <div class="bg-white shadow rounded">
+    <div class="bg-white shadow-md rounded-lg">
         <table class="min-w-full">
             <thead>
                 <tr class="border-b">
@@ -28,16 +28,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($projects as $p)
+                @forelse($projects as $p)
                     <tr class="border-b">
                         <td class="p-3">{{ $p->id }}</td>
                         <td class="p-3">{{ $p->lead->name }}</td>
                         <td class="p-3">{{ $p->product->name }}</td>
                         <td class="p-3">
                             <span class="px-2 py-1 rounded text-xs font-semibold
-                                {{ $p->status === 'approved' ? 'bg-green-100 text-green-800' : '' }}
-                                {{ $p->status === 'rejected' ? 'bg-red-100 text-red-800' : '' }}
-                                {{ $p->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}">
+                                        {{ $p->status === 'approved' ? 'bg-green-100 text-green-800' : '' }}
+                                        {{ $p->status === 'rejected' ? 'bg-red-100 text-red-800' : '' }}
+                                        {{ $p->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}">
                                 {{ ucfirst($p->status) }}
                             </span>
                         </td>
@@ -47,7 +47,8 @@
                                 @if($p->status === 'pending')
                                     <form action="{{ route('projects.destroy', $p) }}" method="POST"
                                         onsubmit="return confirm('Delete project?')">
-                                        @csrf @method('DELETE')
+                                        @csrf
+                                        @method('DELETE')
                                         <button class="text-red-600 hover:text-red-800">Delete</button>
                                     </form>
                                 @else
@@ -81,7 +82,13 @@
                             </a>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="7" class="text-center p-4 text-gray-500">
+                            No project data available.
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

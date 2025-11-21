@@ -6,7 +6,7 @@
     </h2>
 
     <form action="{{ isset($user) ? route('users.update', $user) : route('users.store') }}" method="POST"
-        class="bg-white p-6 rounded shadow">
+        class="bg-white p-6 shadow-md rounded-lg">
         @csrf
         @if(isset($user))
             @method('PUT')
@@ -14,8 +14,7 @@
 
         <div class="mb-4">
             <label class="block text-sm">Username</label>
-            <input name="username" class="w-full border px-3 py-2" value="{{ old('username', $user->username ?? '') }}"
-                required>
+            <input name="username" class="w-full border px-3 py-2" value="{{ old('username', $user->username ?? '') }}">
         </div>
 
         <div class="mb-4">
@@ -27,7 +26,7 @@
 
         <div class="mb-4">
             <label class="block text-sm">Role</label>
-            <select name="role" class="w-full border px-3 py-2" required>
+            <select name="role" class="w-full border px-3 py-2">
                 @php
                     $roles = ['Admin', 'Manager', 'Sales'];
                 @endphp
@@ -38,6 +37,19 @@
                 @endforeach
             </select>
         </div>
+
+        @if($errors->any())
+            <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                <strong>Oops! Ada yang salah:</strong>
+                <p>halo</p>
+                <ul class="mt-2 list-disc list-inside">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
 
         <div>
             <button class="bg-green-600 px-6 py-2 rounded text-white">Save</button>

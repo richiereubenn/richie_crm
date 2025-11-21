@@ -12,15 +12,22 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = Customer::with('project.lead')
+        $query = Customer::with('project.lead')
             ->whereHas('project', function ($q) {
-                $q->where('status', 'approved');
-            })
-            ->get()
-            ->groupBy('project.lead_id');
+                $q->where('status', 'approved'); 
+            });
+
+        if (auth()->user()->role === 'Sales') {
+            $query->whereHas('project.lead', function ($q) {
+                $q->where('user_id', auth()->id());
+            });
+        }
+
+        $customers = $query->get()->groupBy('project.lead_id');
 
         return view('customers.index', compact('customers'));
     }
+
 
     public function detail($lead)
     {

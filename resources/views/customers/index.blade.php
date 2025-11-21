@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-semibold">Customer List</h2>
+        <h2 class="text-2xl font-semibold">Customer</h2>
     </div>
 
-    <div class="bg-white shadow rounded">
+    <div class="bg-white shadow-md rounded-lg">
         <table class="min-w-full">
             <thead>
                 <tr class="border-b">
