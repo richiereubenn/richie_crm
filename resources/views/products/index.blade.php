@@ -29,7 +29,7 @@
             <tbody>
                 @forelse($products as $p)
                     <tr class="border-b">
-                        <td class="p-3">{{ $p->id }}</td>
+                        <td class="p-3">{{ $loop->iteration }}</td>
                         <td class="p-3">{{ $p->name }}</td>
                         <td class="p-3">{{ $p->description }}</td>
                         <td class="p-3">Rp {{ number_format($p->price, 0, ',', '.') }}</td>

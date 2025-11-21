@@ -30,7 +30,7 @@
             <tbody>
                 @forelse($projects as $p)
                     <tr class="border-b">
-                        <td class="p-3">{{ $p->id }}</td>
+                        <td class="p-3">{{ $loop->iteration }}</td>
                         <td class="p-3">{{ $p->lead->name }}</td>
                         <td class="p-3">{{ $p->product->name }}</td>
                         <td class="p-3">

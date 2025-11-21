@@ -40,7 +40,6 @@
                     <tr class="border-b hover:bg-gray-50">
                         <td class="p-3">{{ $project->product->name }}</td>
 
-                        {{-- Status --}}
                         <td class="p-3">
                             <span class="px-2 py-1 rounded text-xs font-semibold
                                 {{ $cust && $cust->payment_status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
@@ -48,15 +47,12 @@
                             </span>
                         </td>
 
-                        {{-- Payment Date --}}
                         <td class="p-3">{{ $cust->payment_date ? date('d M Y', strtotime($cust->payment_date)) : '-' }}</td>
 
-                        {{-- Expired Date --}}
                         <td class="p-3">{{ $cust->expired_date ? date('d M Y', strtotime($cust->expired_date)) : '-' }}</td>
 
-                        {{-- Action --}}
                         <td class="p-3 text-center">
-                            @if(!$cust || $cust->payment_status !== 'paid')
+                            @if(!$cust || $cust->payment_status !== 'paid' && auth()->user()->role === 'Sales')
                                 <form method="POST" action="{{ route('customers.pay', $project->id) }}">
                                     @csrf
                                     <button class="px-3 py-1 bg-green-600 hover:bg-green-700 text-white rounded text-sm shadow-sm">
@@ -64,7 +60,7 @@
                                     </button>
                                 </form>
                             @else
-                                <span class="text-green-600 font-semibold">Paid</span>
+                                <span class="text-green-600 font-semibold">-</span>
                             @endif
                         </td>
                     </tr>

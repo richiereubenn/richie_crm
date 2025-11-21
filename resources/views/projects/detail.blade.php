@@ -19,6 +19,7 @@
                 <p><strong>Name:</strong> {{ $project->lead->name }}</p>
                 <p><strong>Email:</strong> {{ $project->lead->email ?? '-' }}</p>
                 <p><strong>Phone:</strong> {{ $project->lead->phone ?? '-' }}</p>
+                <p><strong>Address:</strong> {{ $project->lead->address ?? '-' }}</p>
             </div>
         </div>
 

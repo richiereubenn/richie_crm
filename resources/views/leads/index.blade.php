@@ -29,7 +29,7 @@
             <tbody>
                 @forelse($leads as $lead)
                     <tr class="border-b">
-                        <td class="p-3">{{ $lead->id }}</td>
+                        <td class="p-3">{{ $loop->iteration }}</td>
                         <td class="p-3">{{ $lead->name }}</td>
                         <td class="p-3">{{ $lead->email }}</td>
                         <td class="p-3">{{ $lead->phone }}</td>

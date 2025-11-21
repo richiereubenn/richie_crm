@@ -25,7 +25,7 @@
       <tbody>
         @forelse($users as $u)
           <tr class="border-b">
-            <td class="p-3">{{ $u->id }}</td>
+            <td class="p-3">{{ $loop->iteration }}</td>
             <td class="p-3">{{ $u->username }}</td>
             <td class="p-3">{{ $u->role }}</td>
             <td class="p-3 flex gap-2 justify-center">
