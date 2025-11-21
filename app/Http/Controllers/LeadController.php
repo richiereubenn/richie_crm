@@ -69,7 +69,7 @@ class LeadController extends Controller
         $lead->update($request->all());
 
         return redirect()->route('leads.index')
-            ->with('success', 'Project has been successfully edited!');;
+            ->with('success', 'Lead has been successfully edited!');
     }
 
     public function destroy(Lead $lead)
